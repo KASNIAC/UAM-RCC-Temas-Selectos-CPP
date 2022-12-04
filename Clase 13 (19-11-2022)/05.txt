@@ -1,0 +1,22 @@
+/*
+   //PRUEBA 1
+   vector v1;        // vacío 
+   vector v2(5);     // cinco ints que valen 0 
+   vector v3(5, 7);  // cinco ints que valen 7 
+ 
+   imprime(v1); 
+   imprime(v2); 
+   imprime(v3); 
+   vector v4 = v3; 
+   v4[0] = -8; 
+   imprime(v3); 
+   imprime(v4); 
+   vector v5 = std::move(v3); 
+   imprime(v3); 
+   imprime(v5); 
+ 
+   for (int i = 0; i < 15; ++i) { 
+      v5.push_back(i); 
+   } 
+   imprime(v5); 
+   */
