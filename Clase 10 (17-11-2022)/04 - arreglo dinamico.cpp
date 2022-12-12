@@ -1,4 +1,4 @@
-//Definiremos un tipo de dato para evitar andando haciendo news y delete a cada rato.
+//Definiremos un tipo de dato para evitar andar haciendo new y delete a cada rato.
 #include <iostream>
 
 struct arreglo_dinamico {
@@ -17,7 +17,7 @@ struct arreglo_dinamico {
       std::cout << "constructor con parametros; la memoria quedó en " << p << "\n";
    }
 
-   //PROBLEMA!: constructor por copia
+   // constructor por copia
    arreglo_dinamico(const arreglo_dinamico& arr) {
       p = new int[arr.tam];
       tam = arr.tam;
@@ -27,19 +27,23 @@ struct arreglo_dinamico {
       std::cout << "constructor por copia; la memoria quedó en " << p << "\n";
    }
 
-   //Sin un destructor, nuevamente no se liberará la memoria
+   //Sin un destructor no se liberará la memoria
    ~arreglo_dinamico( ) {
       std::cout << "destructor; liberando " << p << "\n";
       delete[] p;
    }
 
-   //PROBLEMA!: constructor por copia
+   // asignación por copia
    void operator=(const arreglo_dinamico& arr) {
-      if (this == &arr) {
-         return;
+      if (this == &arr) {    // no hay que hacer nada si nos
+         return;             // queremos copiar a nosotros mismos  (a = a)
       }
 
-      delete[] p;
+      //ABAJO HAY UN PROBLEMA, PUES PRIMERO LIBERAMOS LA MEMORIA Y LUEGO LA APARTAMOS,
+      // PERO SI NO LLEGARÁ A HABER MEMORIA, NOS QUEDARÍAMOS COMO EL PERRO DE LAS DOS TORTAS
+      // Este error se soluciona en la Clase 11
+
+      delete[] p;    // liberamos la memoria que tal vez teníamos
       p = new int[arr.tam];
       tam = arr.tam;
       for (int i = 0; i < tam; ++i) {

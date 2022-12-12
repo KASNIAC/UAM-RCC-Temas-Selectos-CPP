@@ -90,6 +90,7 @@ void imprime(const vector& v) {
 }
 
 int main( ) {
+//PRUEBA 1
    vector v1;        // vacío
    vector v2(5);     // cinco ints que valen 0
    vector v3(5, 7);  // cinco ints que valen 7

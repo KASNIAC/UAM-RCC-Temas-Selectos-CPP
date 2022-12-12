@@ -7,26 +7,28 @@ struct arreglo_dinamico {
    int* p;
 
    arreglo_dinamico( ) {
-      std::cout << "constructor\n";
-      tam = 0;
       p = nullptr;
+      tam = 0;
+      std::cout << "constructor sin parametros; la memoria quedó en " << p << "\n";
    }
 
-   explicit arreglo_dinamico(int t) {
-      std::cout << "constructor\n";
-      tam = t;
-      p = new int[t];
+   explicit arreglo_dinamico(int n) {
+      p = new int[n];
+      tam = n;
+      std::cout << "constructor con parametros; la memoria quedó en " << p << "\n";
    }
 
-   arreglo_dinamico(const arreglo_dinamico& a) {
-      std::cout << "constructor por copia\n";
-      tam = a.tam;
-      p = new int[a.tam];
+   // constructor por copia
+   arreglo_dinamico(const arreglo_dinamico& arr) {
+      p = new int[arr.tam];
+      tam = arr.tam;
       for (int i = 0; i < tam; ++i) {
-         p[i] = a.p[i];
+         p[i] = arr.p[i];
       }
+      std::cout << "constructor por copia; la memoria quedó en " << p << "\n";
    }
 
+    // constructor por movimiento
    arreglo_dinamico(arreglo_dinamico&& a) {
       std::cout << "constructor por movimiento\n";
       tam = a.tam;
@@ -35,20 +37,25 @@ struct arreglo_dinamico {
       a.p = nullptr;
    }
 
+   //Sin un destructor no se liberará la memoria
    ~arreglo_dinamico( ) {
-      std::cout << "destructor\n";
+      std::cout << "destructor; liberando " << p << "\n";
       delete[] p;
    }
 
-   void operator=(const arreglo_dinamico& a) {
-      std::cout << "asignacion por copia\n";
-      if (this != &a) {
-         delete[] p;
-         tam = a.tam;
-         p = new int[a.tam];
-         for (int i = 0; i < tam; ++i) {
-            p[i] = a.p[i];
-         }
+   // asignación por copia
+   void operator=(const arreglo_dinamico& arr) {
+      if (this == &arr) {    // no hay que hacer nada si nos
+         return;             // queremos copiar a nosotros mismos
+      }
+
+      //PROBLEMA DE LA Clase 10 SOLUCIONADO!
+      int* q = new int[arr.tam];   // evitar quedarnos como el perro de las dos tortas: primero pedir memoria antes de liberar la que teníamos
+      delete[] p;            // liberamos la memoria que tal vez teníamos
+      p = q;
+      tam = arr.tam;
+      for (int i = 0; i < tam; ++i) {
+         p[i] = arr.p[i];
       }
    }
 
@@ -78,4 +85,16 @@ arreglo_dinamico f( ) {
 int main( ) {
    arreglo_dinamico a = f( );
    std::cout << "-----\n";
+
+
+   /*
+   arreglo_dinamico arr(5);
+   for (int i = 0; i < arr.tam; ++i) {
+      arr.p[i] = 999;
+   }
+
+   arreglo_dinamico brr(7);
+   brr = brr;
+
+   */
 }
