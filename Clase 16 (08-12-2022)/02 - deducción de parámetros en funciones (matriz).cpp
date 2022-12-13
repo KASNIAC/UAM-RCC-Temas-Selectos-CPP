@@ -32,6 +32,7 @@ void g(const std::array<std::array<T, C>, F>& m) {
 
 int main( ) {
    matriz<int, 2> m1;
+   matriz<int, 2, 3> m2;
    matriz<int, 2, 3, 4> m3;
 
    std::cout << sizeof(m1) << "\n";
@@ -43,9 +44,9 @@ int main( ) {
    matriz<int, 2, 3, 4> m4 = m3;
    std::cout << m4[0][1][2] << "\n";
 
-   matriz<int, 2, 3> m2;
+   //---------------------------------------------------------------------------------
    //f(m2); //NO JALA
-   f<int, 2, 3>(m2); //YA JALA, LE ESTAMOS AYUDANDO A QUE DEDUZCA LOS PARÁMETROS CONT <int, 2, 3>
+   f<int, 2, 3>(m2); //YA JALA, LE ESTAMOS AYUDANDO A QUE DEDUZCA LOS PARÁMETROS CON: <int, 2, 3>
    std::array<std::array<int, 3>, 2> a;
    g(a);
 }

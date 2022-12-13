@@ -10,7 +10,7 @@ class vector {
    int tam, cap;
 
 public:
-   vector( )        // constructor delegador
+   vector( )
    : vector(0) {
    }
 
@@ -20,6 +20,14 @@ public:
 
    vector(int n, const T& v)
    : mem((T*)operator new(sizeof(T) * n)), tam(n), cap(n) {
+   /*
+      Mientras que new T[n] pide memoria y construye los elementos,
+      (T*)operator new(sizeof(T) * n) pide memoria pero no construye los elementos
+
+      para construir manualmente el elemento mem[i] se debe usar la notación
+         new(&mem[i]) T(parámetros)
+      que se conoce como placement new.
+   */
       for (int i = 0; i < n; ++i) {
          new(&mem[i]) T(v);   // placement new
       }
@@ -38,6 +46,16 @@ public:
    }
 
    ~vector( ) {
+   /*
+      Cuando se usa operator new en lugar de new T[], se debe
+      liberar la memoria con operator delete en lugar de delete.
+
+      El operator delete no invoca destructores, así que se deben
+      llamar manualmente antes de liberar la memoria.
+
+      Para llamar manualmente el destructor de mem[i] se usa la notación
+         mem[i].~T( )
+   */
       for (int i = 0; i < tam; ++i) {
          mem[i].~T( );
       }
@@ -94,7 +112,7 @@ void imprime(const vector<T>& v) {
    std::cout << "\n";
 }
 
-// gu�a de deducci�n
+// gu�a de deducci�n
 // vector( ) -> vector<int>;
 
 struct s {

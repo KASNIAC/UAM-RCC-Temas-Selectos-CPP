@@ -19,7 +19,7 @@ void h( ) {
    std::unique_ptr<ejemplo> p(new ejemplo( )); //Invocará a los destructores y ya no habrá fuga de memoria
 }
 
-//Cuidado al pedir arreglos con std::unique_ptr
+//Cuidado al pedir arreglos con std::unique_ptr, no olvidar el []
 void g( ) {
    std::unique_ptr<ejemplo[]> p(new ejemplo[5]);
 }
@@ -35,7 +35,19 @@ void f( ) {
 }
 
 int main( ) {
+   /*
    f( );
    f( );
    f( );
+   */
+
+   //g();
+
+   /*
+   h( );
+   h( );
+   h( );
+   */
+
+   k();
 }

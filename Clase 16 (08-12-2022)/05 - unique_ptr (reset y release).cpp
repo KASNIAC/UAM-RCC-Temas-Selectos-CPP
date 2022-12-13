@@ -17,7 +17,7 @@ void g( ) {
    //--------------------------.reset()-------------------------------------------
    //Ok, ya me cayó gordo el otro, lo mato y ahora apunto a uno nuevo
    //p.reset(new ejemplo);
-      //p.reset( );  //No construyo uno nuevo, solo lo mato porque me cayó gordo.
+      //p.reset( );  //NO construyo uno nuevo, solo lo mato porque me cayó gordo.
 
 
    //-----------------------Evitar usar .release()--------------------------------
